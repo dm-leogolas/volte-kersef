@@ -329,6 +329,8 @@ footer{margin-top:30px;text-align:center;display:grid;gap:14px;justify-items:cen
 .tema-bloco .r{font-size:13.5px;line-height:1.45}
 .tema-bloco .qtd{margin-top:4px;font:700 12px var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--ouro-claro)}
 .tema-bloco:hover .qtd{color:var(--destaque)}
+.tema-bloco.em-destaque{border-color:var(--ouro-borda);background:radial-gradient(ellipse 90% 80% at 0% 0%,rgb(220 139 24/.24),transparent 70%),rgb(0 0 0/.35);box-shadow:0 0 20px rgb(220 139 24/.28)}
+.tema-bloco .tag-dest{display:block;width:max-content;margin-bottom:6px;padding:2px 8px;border-radius:999px;background:var(--amarelo);color:#1a1006;font:700 10px/1.4 var(--display);letter-spacing:.12em}
 .tema{min-height:36px;display:inline-flex;align-items:center;gap:8px;padding:0 12px;border:1px solid rgb(226 186 112/.3);border-radius:999px;background:rgb(0 0 0/.4);color:#f2e7d0;cursor:pointer;font:500 13px var(--body);transition:border-color var(--t),background var(--t)}
 .tema:hover{border-color:var(--ouro-borda);background:rgb(220 139 24/.12)}
 .tema span{font:700 12px var(--body);color:var(--ouro-claro);font-variant-numeric:tabular-nums}
@@ -366,8 +368,8 @@ dialog.leitura::backdrop{background:rgb(8 2 1/.84);-webkit-backdrop-filter:blur(
 .upd i{font-style:normal;font-weight:700;color:#f0c877}
 .upd u{text-decoration:none;font-weight:700;color:#e8a46c}
 .upd .tab{overflow-x:auto}
-.upd table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;min-width:340px}
-.upd th,.upd td{text-align:right;padding:5px 12px 5px 0;border-bottom:1px solid rgb(226 186 112/.18)}
+.upd table{border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums;width:100%}
+.upd th,.upd td{text-align:right;padding:5px 0 5px 8px;white-space:nowrap;border-bottom:1px solid rgb(226 186 112/.18)}
 .upd th:first-child,.upd td:first-child{text-align:left}
 .upd th{font:700 11px var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--apagado)}
 .upd td:last-child{font-weight:700;color:var(--destaque)}
@@ -660,131 +662,131 @@ html.travado{overflow:hidden}
 </dialog>
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 <script>
-// Resumo das atualizações dos últimos 100 dias (13 patches de 16/07 a 15/10/2026 + roadmap do 2º semestre).
-// Fonte: artefato "WYD Global · Argumentos de reativação", com o texto reescrito para o jogador.
+// Resumo das atualizações dos últimos 100 dias (patches de 16/07 a 22/10/2026).
+// v2 (29/10/2026): revisão a partir do feedback da equipe — seção própria para os Acessórios Ancient,
+// correção do texto do Bahamut Horn, título da Guerra de Cidades, remoção dos itens do roadmap sem previsão
+// e textos reescritos para explicar o que mudou na prática. Fonte: patchlists e guias oficiais.
 // Cada cartão: ícone (img/upd/<itemId>.gif), título e texto em PT/EN, tabela opcional e links oficiais.
 // <i> = nome de item do jogo; <u> = nome de NPC (estilizados pela página).
 const BASE = 'https://wydglobal.raidhut.com/pt-br/';
-const PATCH = { '16/07': 3542, '23/07': 3552, '30/07': 3560, '06/08': 3568, '13/08': 3580, '20/08': 3590, '27/08': 3598, '03/09': 3606, '24/09': 3634, '01/10': 3646, '08/10': 3656, '15/10': 3666 };
+const PATCH = { '16/07': 3542, '23/07': 3552, '30/07': 3560, '06/08': 3568, '13/08': 3580, '20/08': 3590, '27/08': 3598, '03/09': 3606, '24/09': 3634, '01/10': 3646, '08/10': 3656, '15/10': 3666, '22/10': 3674 };
 const p = (d) => ({ tipo: 'patch', d, url: `${BASE}noticias/updates/${PATCH[d]}-patchlist-${d.replace('/', '-')}-2026` });
 const g = (id, pt, en) => ({ tipo: 'guia', pt, en, url: BASE + id });
-const ROADMAP = { tipo: 'guia', pt: 'Roadmap 2º semestre', en: '2nd half roadmap', url: BASE + 'noticias/news/3494-roadmap-2-semestre-de-2026' };
+const G_ANCIENT = g(3488, 'Guia Acessórios Ancient', 'Ancient Accessories guide');
+const G_AMUNRA_ANCIENT = g(3490, 'Guia Pedra Amunra Ancient', 'Ancient Amunra Stone guide');
 
 window.ATUALIZACOES = {
-  periodo: { pt: '13 patches · 16/07 a 15/10/2026 · roadmap do 2º semestre', en: '13 patches · Jul 16 to Oct 15, 2026 · 2nd half roadmap' },
+  periodo: { pt: 'Patches de 16/07 a 22/10/2026', en: 'Patches from Jul 16 to Oct 22, 2026' },
   secoes: [
-    { id: 'progresso', icone: 5224, r: { pt: 'Teleporte da Sorte diário e mais chance de refino.', en: 'Daily Lucky Teleport and better refining odds.' },
-      pt: { t: 'Progredir ficou mais rápido', d: 'Se você parou porque ficou para trás, estas mudanças encurtam a distância até quem continuou jogando.' },
+    { id: 'ancient', destaque: true, icone: 6498,
+      r: { pt: 'Cinto, Colar e Brinco Ancient, agora com refino até +13.', en: 'Ancient Belt, Necklace and Earring, now refinable up to +13.' },
+      pt: { t: 'Acessórios Ancient', d: 'A maior novidade de Kersef. Se você parou com os Acessórios Bahamut no máximo, agora existe um próximo passo de progressão.' },
+      en: { t: 'Ancient Accessories', d: 'The biggest news in Kersef. If you stopped with maxed-out Bahamut Accessories, there is now a next step to progress.' },
+      cards: [
+        { icone: 6498, links: [G_ANCIENT, G_AMUNRA_ANCIENT],
+          pt: { t: 'Chegaram os Acessórios Bahamut Ancient', p: 'Os <i>Acessórios Bahamut Ancient</i> são a evolução do <i>Cinto</i>, do <i>Colar</i> e do <i>Brinco</i> Bahamut. A base de cada um é um Acessório Bahamut +15 Tier 8, combinado com uma <i>Ancient Relic</i> e outros materiais, tudo com o <u>Torvald</u>. Cada peça tem duas versões: Madness, para quem joga com dano físico (Força e dano crítico), e Guardian, para quem joga com magia (Inteligência e ataque mágico). A <i>Pedra Amunra</i> também ganhou a sua versão Ancient, criada a partir de uma Pedra Amunra +15 Tier 8.' },
+          en: { t: 'Bahamut Ancient Accessories have arrived', p: '<i>Bahamut Ancient Accessories</i> are the next step for the Bahamut <i>Belt</i>, <i>Necklace</i> and <i>Earring</i>. Each one is built on a +15 Tier 8 Bahamut Accessory, combined with an <i>Ancient Relic</i> and other materials, all at <u>Torvald</u>. Each piece comes in two versions: Madness, for physical damage builds (Strength and critical damage), and Guardian, for magic builds (Intelligence and magic attack). The <i>Amunra Stone</i> also got an Ancient version, created from a +15 Tier 8 Amunra Stone.' } },
+        { icone: 6495, links: [p('01/10'), G_ANCIENT, G_AMUNRA_ANCIENT],
+          pt: { t: 'Refinação liberada até +13', p: 'Quando os acessórios chegaram, o refino parava no +9. Desde a atualização de 01/10, os <i>Acessórios Ancient</i> e a <i>Pedra Amunra Ancient</i> podem ser refinados até +13, e cada nível a mais aumenta os atributos da peça. Para refinar, basta arrastar uma <i>Ancient Relic</i> (ou uma <i>Eternal Relic</i>, no caso da pedra) sobre o item. Do +9 ao +13, a chance de sucesso é de 8% por tentativa.' },
+          en: { t: 'Refining unlocked up to +13', p: 'When the accessories launched, refining stopped at +9. Since the Oct 1 update, <i>Ancient Accessories</i> and the <i>Ancient Amunra Stone</i> can be refined up to +13, and every extra level raises the item’s attributes. To refine, drag an <i>Ancient Relic</i> (or an <i>Eternal Relic</i> for the stone) onto the item. From +9 to +13, each attempt has an 8% success chance.' } },
+        { icone: 6493, links: [p('23/07'), p('01/10'), G_ANCIENT, G_AMUNRA_ANCIENT],
+          pt: { t: 'Troca de adicional e conversão Madness/Guardian', p: 'O <u>Torvald</u> tem duas opções para ajustar as peças Ancient que você já tem, sem começar outra do zero. A primeira troca o adicional: nos <i>Acessórios Ancient</i>, entre HP, MP e Imunidade; na <i>Pedra Amunra Ancient</i>, entre HP, MP e Crítico. A segunda converte o <i>Cinto</i>, o <i>Colar</i> e o <i>Brinco</i> Ancient entre Madness e Guardian (um Colar vira outro Colar, por exemplo), útil para quem volta querendo trocar dano físico por mágico, ou o contrário. As duas têm 100% de chance e custam 1 <i>Reforge Stone</i> mais 1 <i>Primordial Crystal</i> (ou 1 <i>Profaned Crystal</i>, na troca de adicional da pedra).' },
+          en: { t: 'Bonus swap and Madness/Guardian conversion', p: '<u>Torvald</u> offers two ways to adjust the Ancient pieces you already have, without starting another from scratch. The first swaps the bonus: on <i>Ancient Accessories</i>, between HP, MP and Immunity; on the <i>Ancient Amunra Stone</i>, between HP, MP and Critical. The second converts the Ancient <i>Belt</i>, <i>Necklace</i> and <i>Earring</i> between Madness and Guardian (a Necklace becomes another Necklace, for example), handy if you come back wanting to switch from physical to magic damage, or the other way around. Both have a 100% success chance and cost 1 <i>Reforge Stone</i> plus 1 <i>Primordial Crystal</i> (or 1 <i>Profaned Crystal</i> for the stone’s bonus swap).' } },
+      ] },
+    { id: 'progresso', icone: 5224,
+      r: { pt: 'Teleporte da Sorte diário e mais chance de refino.', en: 'Daily Lucky Teleport and better refining odds.' },
+      pt: { t: 'Progredir ficou mais rápido', d: 'Se você parou porque ficou para trás, estas mudanças diminuem a distância até quem continuou jogando.' },
       en: { t: 'Progress got faster', d: 'If you stopped because you fell behind, these changes close the gap to those who kept playing.' },
       cards: [
         { icone: 5224, links: [p('16/07')],
-          pt: { t: 'Teleporte da Sorte virou evento diário', p: 'Cada missão dá mais teleportes e ficou mais fácil começar. O evento ficou mais curto, mas as recompensas dobraram. O <u>NPC IV</u> agora pode dar <i>Ovo Amarelo</i> e <i>Tesouro Anubis Especial</i>.' },
-          en: { t: 'Lucky Teleport is now a daily event', p: 'Each mission gives more teleports and getting started is easier. The event is shorter, but rewards doubled. <u>NPC IV</u> can now give <i>Yellow Egg</i> and <i>Special Anubis Treasure</i>.' } },
+          pt: { t: 'Teleporte da Sorte todos os dias', p: 'O Teleporte Especial virou um evento fixo e diário, então você pode participar todos os dias e acumular mais entradas. Cada missão concluída agora rende mais teleportes, o que ajuda quem está começando no evento. O evento ficou mais curto, mas as recompensas foram dobradas. Além disso, o <u>NPC IV</u> passou a ter chance de dar <i>Ovo Amarelo</i> e <i>Tesouro Anubis Especial</i>.' },
+          en: { t: 'Lucky Teleport every day', p: 'The Special Teleport is now a fixed daily event, so you can join every day and stack up more entries. Each completed mission now gives more teleports, which helps players who are new to the event. The event got shorter, but its rewards were doubled. On top of that, <u>NPC IV</u> can now give <i>Yellow Egg</i> and <i>Special Anubis Treasure</i>.' } },
         { icone: 1242, links: [p('20/08'), g(2748, 'Guia HUD de Refinação', 'Refining HUD guide')],
           tabela: { cab: { pt: ['Refino', 'Base', 'Dragon Soul +9', 'Final'], en: ['Refine', 'Base', 'Dragon Soul +9', 'Final'] },
             linhas: [['+9 → +10', '57%', '+18%', '75%'], ['+10 → +11', '47%', '+18%', '65%'], ['+11 → +12', '32%', '+18%', '50%'], ['+12 → +13', '22%', '+18%', '40%'], ['+13 → +14', '16,5%', '+13,5%', '30%'], ['+14 → +15', '11%', '+9%', '20%']] },
-          pt: { t: 'Refino de Armadura Red Dragon e Arma Bahamut', p: 'A chance base de refino foi revista. Com o bônus máximo de <i>Dragon Soul</i> (+9), as chances finais ficaram assim:' },
-          en: { t: 'Red Dragon Armor and Bahamut Weapon refining', p: 'Base refining odds were revised. With the maximum <i>Dragon Soul</i> bonus (+9), the final odds are:' } },
+          pt: { t: 'Novas chances de refino da Armadura Red Dragon e da Arma Bahamut', p: 'As chances base de refino desses equipamentos foram revisadas. O <i>Dragon Soul</i> soma um bônus que aumenta conforme a refinação dele. Com o bônus máximo (+9), as chances finais de cada etapa ficaram assim:' },
+          en: { t: 'New refining odds for Red Dragon Armor and Bahamut Weapon', p: 'The base refining odds for this gear were revised. <i>Dragon Soul</i> adds a bonus that grows with its own refine level. With the maximum bonus (+9), the final odds for each step are:' } },
         { icone: 5212, links: [p('27/08'), g(2880, 'Guia Capa Celestial', 'Celestial Cape guide')],
-          pt: { t: 'Capa Celestial mais fácil de refinar', p: 'De +9 a +15, a chance de sucesso subiu de 25% para 30% e a chance de regredir na falha caiu de 65% para 54%. Os adicionais de <i>Freya Disciple</i> e <i>Odin Disciple</i> ficaram mais baratos.' },
-          en: { t: 'Celestial Cape is easier to refine', p: 'From +9 to +15, success odds rose from 25% to 30% and the chance to drop on failure fell from 65% to 54%. <i>Freya Disciple</i> and <i>Odin Disciple</i> bonuses got cheaper.' } },
+          pt: { t: 'Capa Celestial mais fácil de refinar', p: 'Do +9 ao +15, a chance de sucesso subiu de 25% para 30%. E, quando a refinação falha, a chance de ela regredir caiu de 65% para 54%, então você perde progresso com menos frequência. Os adicionais <i>Freya Disciple</i> e <i>Odin Disciple</i> ficaram mais baratos de conseguir, a chance dos adicionais mais raros foi rebalanceada e os adicionais mais fracos saíram da lista.' },
+          en: { t: 'Celestial Cape is easier to refine', p: 'From +9 to +15, the success chance rose from 25% to 30%. And when a refine fails, the chance of it regressing fell from 65% to 54%, so you lose progress less often. <i>Freya Disciple</i> and <i>Odin Disciple</i> bonuses became cheaper to get, the odds of the rarest bonuses were rebalanced and the weakest bonuses were removed from the pool.' } },
         { icone: 3511, links: [p('13/08'), g(2898, 'Guia Amunra e Bahamut Circlet', 'Amunra and Bahamut Circlet guide')],
-          pt: { t: 'Cytheras Amunra e Bahamut', p: 'A Refinação Premium com proteção ganhou mais chance de sucesso de +13→+14 e de +14→+15, no <u>DarkBlackSmith</u>.' },
-          en: { t: 'Amunra and Bahamut Cytheras', p: 'Protected Premium Refining got better odds from +13→+14 and +14→+15 at the <u>DarkBlackSmith</u>.' } },
+          pt: { t: 'Cytheras Amunra e Bahamut: mais chance nas etapas finais', p: 'No <u>DarkBlackSmith</u>, a Refinação Premium com proteção ficou com mais chance de sucesso justamente nas etapas mais difíceis: de +13 para +14 e de +14 para +15, com ou sem bônus. A refinação comum continua igual.' },
+          en: { t: 'Amunra and Bahamut Cytheras: better odds at the top', p: 'At the <u>DarkBlackSmith</u>, Protected Premium Refining got a higher success chance exactly where it is hardest: +13 to +14 and +14 to +15, with or without bonus. Regular refining is unchanged.' } },
         { icone: 5280, links: [p('30/07'), p('27/08'), g(2740, 'Guia Bahamut Fury', 'Bahamut Fury guide')],
-          pt: { t: 'Draconic Spear e Bahamut Horn mais acessíveis', p: 'A composição da <i>Draconic Spear</i> (+0 e +5) na <u>Alyndra</u> ficou mais barata e o drop da Spear na Bahamut Queen subiu 20%. O <i>Bahamut Horn</i> ganhou uma troca direta: 3 <i>Bahamut Box IV</i> + 1 <i>Barra de Prata (1Bi)</i>.' },
-          en: { t: 'Draconic Spear and Bahamut Horn are easier to get', p: '<i>Draconic Spear</i> composition (+0 and +5) at <u>Alyndra</u> got cheaper and the Spear drop from the Bahamut Queen rose 20%. <i>Bahamut Horn</i> now has a direct trade: 3 <i>Bahamut Box IV</i> + 1 <i>Silver Bar (1B)</i>.' } },
+          pt: { t: 'Draconic Spear e Bahamut Horn mais acessíveis', p: 'A composição da <i>Draconic Spear</i> (+0 e +5) na <u>Alyndra</u> passou a pedir menos recursos. Também aumentou a chance de obtenção do <i>Bahamut Horn</i> ao derrotar a Bahamut Queen utilizando qualquer Spear. E o Horn ganhou um caminho direto: na <u>Alyndra</u>, 3 <i>Bahamut Box IV</i> + 1 <i>Barra de Prata (1Bi)</i> rendem 1 <i>Bahamut Horn</i> (80% de chance) ou 2 (20%).' },
+          en: { t: 'Draconic Spear and Bahamut Horn are easier to get', p: '<i>Draconic Spear</i> composition (+0 and +5) at <u>Alyndra</u> now takes fewer resources. The chance of getting a <i>Bahamut Horn</i> when defeating the Bahamut Queen with any Spear was also increased. And the Horn now has a direct route: at <u>Alyndra</u>, 3 <i>Bahamut Box IV</i> + 1 <i>Silver Bar (1B)</i> give 1 <i>Bahamut Horn</i> (80% chance) or 2 (20%).' } },
         { icone: 4141, links: [p('27/08'), g(3444, 'Guia Pedra Amunra', 'Amunra Stone guide')],
-          pt: { t: 'Pedra Amunra até +9 sem risco', p: 'Refino de +0 a +9 da <i>Pedra Amunra</i> com 100% de sucesso usando <i>Poeira de Lactolerium 100</i>.' },
-          en: { t: 'Amunra Stone up to +9 with no risk', p: 'Refining the <i>Amunra Stone</i> from +0 to +9 succeeds 100% of the time with <i>Lactolerium Powder 100</i>.' } },
+          pt: { t: 'Pedra Amunra até +9 sem risco', p: 'Agora existe uma forma de refinar a <i>Pedra Amunra</i> de +0 a +9 com 100% de sucesso, usando <i>Poeira de Lactolerium 100</i>. Assim você leva a pedra até o +9 sem correr o risco de falhar no caminho.' },
+          en: { t: 'Amunra Stone up to +9 with no risk', p: 'There is now a way to refine the <i>Amunra Stone</i> from +0 to +9 with a 100% success rate, using <i>Lactolerium Powder 100</i>. That takes the stone to +9 with no risk of failing along the way.' } },
       ] },
-    { id: 'equipamento', icone: 6498, r: { pt: 'Troca de adicionais e Ancient até +13.', en: 'Bonus swaps and Ancient up to +13.' },
-      pt: { t: 'Equipamentos e endgame', d: 'Novas opções de adicionais, mais etapas de refino e ajustes nos sistemas de guilda.' },
-      en: { t: 'Gear and endgame', d: 'New bonus options, more refining tiers and changes to guild systems.' },
+    { id: 'equipamento', icone: 6447,
+      r: { pt: 'Troca de adicionais, Imunidade até 600 e Guerra de Cidades.', en: 'Bonus swaps, Immunity up to 600 and City Wars.' },
+      pt: { t: 'Equipamentos e guildas', d: 'Mais liberdade para ajustar os adicionais, resistência maior e melhorias nas disputas entre guildas.' },
+      en: { t: 'Gear and guilds', d: 'More freedom to adjust bonuses, higher resistance and improvements to guild battles.' },
       cards: [
-        { icone: 6493, links: [p('23/07'), g(3488, 'Guia Acessórios Ancient', 'Ancient Accessories guide'), g(3490, 'Guia Amunra Ancient', 'Ancient Amunra guide')],
-          pt: { t: 'Trocar adicionais de Ancient e Amunra Ancient', p: 'Os <i>Acessórios Bahamut Ancient</i> e a <i>Pedra Amunra Ancient</i> podem ter os adicionais alterados, para adaptar o item à sua build.' },
-          en: { t: 'Swap Ancient and Ancient Amunra bonuses', p: '<i>Bahamut Ancient Accessories</i> and the <i>Ancient Amunra Stone</i> can have their bonuses changed to fit your build.' } },
         { icone: 3464, links: [p('27/08'), g(3444, 'Guia Pedra Amunra', 'Amunra Stone guide')],
-          pt: { t: 'Trocar adicional da Pedra Amunra Tier 8', p: 'Nova opção no <u>Lapidário</u> para alterar o adicional da <i>Pedra Amunra</i> Tier 8.' },
-          en: { t: 'Swap the Tier 8 Amunra Stone bonus', p: 'A new option at the <u>Lapidary</u> changes the bonus of a Tier 8 <i>Amunra Stone</i>.' } },
+          pt: { t: 'Troque o adicional da Pedra Amunra Tier 8', p: 'O <u>Lapidário</u> ganhou uma opção nova: trocar o adicional de uma <i>Pedra Amunra</i> Tier 8. Se o adicional que saiu não combina com a sua build, você ajusta a pedra que já tem em vez de começar outra.' },
+          en: { t: 'Change the Tier 8 Amunra Stone bonus', p: 'The <u>Lapidary</u> has a new option: changing the bonus of a Tier 8 <i>Amunra Stone</i>. If the bonus you got does not fit your build, you adjust the stone you already have instead of starting another one.' } },
         { icone: 6447, links: [p('01/10'), g(2944, 'Guia Bahamut Mantle', 'Bahamut Mantle guide')],
-          pt: { t: 'Trocar adicional da Bahamut Mantle sem perder o Tier', p: 'No <u>Balder</u>, você alterna entre Dano Crítico, Crítico Mágico e % HP. Exige o adicional no máximo do Tier. Custo: 1 <i>Bahamut Horn</i> + 3 <i>Emblema da Valquíria +9</i>.' },
-          en: { t: 'Swap the Bahamut Mantle bonus without losing its Tier', p: 'At <u>Balder</u>, switch between Critical Damage, Magic Critical and % HP. The bonus must be at the Tier maximum. Cost: 1 <i>Bahamut Horn</i> + 3 <i>Valkyrie Emblem +9</i>.' } },
-        { icone: 6495, links: [p('01/10'), g(3488, 'Guia Acessórios Ancient', 'Ancient Accessories guide')],
-          pt: { t: 'Converter Ancient Madness em Guardian', p: '<i>Cinto</i>, <i>Colar</i> e <i>Brinco</i> Ancient podem ser trocados entre Madness e Guardian no <u>Torvald</u>, por 1 <i>Primordial Crystal</i> + 1 <i>Reforge Stone</i>. Bom para quem volta querendo mudar de estilo de jogo.' },
-          en: { t: 'Convert Ancient Madness into Guardian', p: 'Ancient <i>Belt</i>, <i>Necklace</i> and <i>Earring</i> can switch between Madness and Guardian at <u>Torvald</u> for 1 <i>Primordial Crystal</i> + 1 <i>Reforge Stone</i>. Handy if you come back wanting a different playstyle.' } },
-        { icone: 6498, links: [p('01/10'), g(3488, 'Guia Acessórios Ancient', 'Ancient Accessories guide'), g(3490, 'Guia Amunra Ancient', 'Ancient Amunra guide')],
-          pt: { t: 'Acessórios e Pedra Amunra Ancient até +13', p: 'A nova etapa do sistema Ancient leva o refino dos <i>Acessórios Ancient</i> e da <i>Pedra Amunra Ancient</i> de +9 até +13.' },
-          en: { t: 'Ancient Accessories and Ancient Amunra up to +13', p: 'The new Ancient tier takes <i>Ancient Accessories</i> and the <i>Ancient Amunra Stone</i> from +9 up to +13.' } },
+          pt: { t: 'Trocar adicional da Bahamut Mantle sem perder o Tier', p: 'O <u>Balder</u> ganhou uma nova opção: alternar o adicional da <i>Bahamut Mantle</i> entre Chance de Dano Crítico, Chance de Crítico Mágico e % de HP, mantendo o Tier que a capa já tem. Para fazer a troca, o adicional precisa estar no valor máximo do Tier atual. O custo é 1 <i>Bahamut Horn</i> + 3 <i>Emblema da Valquíria +9</i>.' },
+          en: { t: 'Swap the Bahamut Mantle bonus without losing its Tier', p: '<u>Balder</u> has a new option that lets you switch the <i>Bahamut Mantle</i> bonus between Critical Damage Chance, Magic Critical Chance and % HP, keeping the Tier the mantle already has. To swap, the bonus must be at the maximum value of its current Tier. It costs 1 <i>Bahamut Horn</i> + 3 <i>Valkyrie Emblem +9</i>.' } },
         { icone: 5723, links: [p('13/08')],
-          pt: { t: 'Imunidade até 600', p: 'O teto de Imunidade subiu de 500 para 600, com uma nova faixa de redução de dano mágico. Investir em resistência voltou a valer a pena.' },
-          en: { t: 'Immunity up to 600', p: 'The Immunity cap rose from 500 to 600, with a new magic damage reduction tier. Investing in resistance pays off again.' } },
+          pt: { t: 'Imunidade agora vai até 600', p: 'O limite de Imunidade subiu de 500 para 600. Quem passa de 500 de Resistência entra numa nova faixa de redução de dano mágico, então investir em resistência acima de 500 passou a fazer diferença. Para quem tem até 500, nada muda.' },
+          en: { t: 'Immunity now goes up to 600', p: 'The Immunity cap rose from 500 to 600. Going past 500 Resistance puts you in a new magic damage reduction tier, so investing in resistance beyond 500 now makes a difference. Nothing changes for characters at 500 or below.' } },
         { icone: 4081, links: [p('13/08'), p('27/08'), g(2119, 'Guia de Guilds e Guerras', 'Guilds and Wars guide')],
-          pt: { t: 'Guerra de Cidades confiável e visível', p: 'Foram corrigidas a posse de Noatun e a distribuição do <i>Dragão de Reino</i>. Os resultados de todas as cidades aparecem no chat, os NPCs mostram o último resultado e a guilda inteira recebe notificação.' },
-          en: { t: 'City Wars are reliable and visible', p: 'Noatun ownership and the <i>Kingdom Dragon</i> distribution were fixed. Results for every city show in chat, NPCs show the latest result and the whole guild gets notified.' } },
+          pt: { t: 'Aprimoramentos na Guerra de Cidades', p: 'Algumas regras foram corrigidas. Antes, uma guilda podia manter Noatun mesmo depois de perder todas as cidades do servidor; agora, ao deixar de possuir Armia, Azran ou Erion, ela também perde Noatun. Além disso, só disputam o <i>Dragão de Reino</i> as guildas que têm Noatun e pelo menos uma cidade. Também ficou mais fácil acompanhar as guerras: o chat mostra o resultado de todas as cidades do servidor (guildas, placar e vencedora), os NPCs exibem o último resultado até a próxima guerra e os membros conectados das guildas envolvidas recebem a notificação, mesmo sem ter participado da batalha.' },
+          en: { t: 'City War improvements', p: 'Some rules were fixed. Before, a guild could keep Noatun even after losing every city on the server; now, when it no longer holds Armia, Azran or Erion, it also loses Noatun. Also, only guilds that hold Noatun and at least one city compete for the <i>Kingdom Dragon</i>. Following the wars also got easier: chat shows the result of every city on the server (guilds, score and winner), NPCs show the latest result until the next war and online members of the guilds involved get notified, even if they did not fight.' } },
         { icone: 5914, links: [p('01/10'), g(2119, 'Guia de Guilds e Guerras', 'Guilds and Wars guide')],
-          pt: { t: 'Guild Shop renovada', p: 'Itens novos e preços revistos em <i>Guild Coin</i>. Os itens são imóveis, exceto o <i>Pergaminho da Água</i>.' },
-          en: { t: 'Guild Shop refreshed', p: 'New items and revised <i>Guild Coin</i> prices. Items are untradeable, except the <i>Water Scroll</i>.' } },
+          pt: { t: 'Guild Shop renovada', p: 'A loja da guilda recebeu itens novos, preços revisados em <i>Guild Coin</i> e uma nova organização das opções no NPC. Os itens comprados ali são imóveis, ou seja, não podem ser trocados nem vendidos, com exceção do <i>Pergaminho da Água</i>.' },
+          en: { t: 'Guild Shop refreshed', p: 'The guild shop got new items, revised <i>Guild Coin</i> prices and a new layout of the options at the NPC. Items bought there are untradeable, meaning they cannot be traded or sold, except the <i>Water Scroll</i>.' } },
       ] },
-    { id: 'cliente', icone: 4127, r: { pt: 'Sem monstros invisíveis e com menu de configurações novo.', en: 'No more invisible monsters, plus a new settings menu.' },
-      pt: { t: 'O jogo roda melhor', d: 'Correções para reclamações antigas da comunidade.' },
-      en: { t: 'The game runs better', d: 'Fixes for long-standing community complaints.' },
+    { id: 'cliente', icone: 4127,
+      r: { pt: 'Sem monstros invisíveis e com menu de configurações novo.', en: 'No more invisible monsters, plus a new settings menu.' },
+      pt: { t: 'O jogo roda melhor', d: 'Correções para problemas antigos de que a comunidade reclamava.' },
+      en: { t: 'The game runs better', d: 'Fixes for long-standing problems the community complained about.' },
       cards: [
         { icone: 4127, links: [p('30/07'), p('06/08')],
-          pt: { t: 'Fim dos monstros invisíveis e das texturas brancas', p: 'Nova gestão de texturas no cliente, um pedido antigo da comunidade. Em sessões longas, as texturas recarregam sozinhas em poucos segundos, sem reiniciar o jogo.' },
-          en: { t: 'No more invisible monsters or white textures', p: 'New texture handling in the client, a long-standing community request. In long sessions, textures reload on their own in a few seconds, with no restart.' } },
+          pt: { t: 'Fim dos monstros invisíveis e das texturas brancas', p: 'O cliente ganhou uma nova gestão de texturas, que combate o problema dos monstros invisíveis. E personagens, itens ou cenários que ficavam brancos depois de muito tempo jogando agora recarregam sozinhos em poucos segundos, sem precisar reiniciar o jogo.' },
+          en: { t: 'No more invisible monsters or white textures', p: 'The client has new texture handling that tackles the invisible monsters problem. And characters, items or scenery that turned white after long play sessions now reload on their own within a few seconds, with no need to restart the game.' } },
         { icone: 4117, links: [p('30/07'), p('06/08')],
-          pt: { t: 'Menu de configurações em tempo real', p: 'Com ESC → S, você ajusta resolução, janela ou tela cheia, efeitos e volume sem reiniciar. Também dá para ocultar trajes, skins de montaria e os elmos Red Dragon e Bahamut.' },
-          en: { t: 'Real-time settings menu', p: 'With ESC → S you change resolution, window or full screen, effects and volume without restarting. You can also hide costumes, mount skins and the Red Dragon and Bahamut helmets.' } },
+          pt: { t: 'Configurações sem reiniciar o jogo', p: 'Agora existe um menu de configurações (ESC → S) que aplica as mudanças na hora, sem reiniciar: resolução, modo janela ou tela cheia, efeitos visuais e volume de música e efeitos. No mesmo menu dá para esconder trajes, skins de montaria e os elmos dos conjuntos Red Dragon e Bahamut.' },
+          en: { t: 'Settings without restarting the game', p: 'There is now a settings menu (ESC → S) that applies changes right away, without restarting: resolution, window or full screen, visual effects and music and sound volume. The same menu lets you hide costumes, mount skins and the Red Dragon and Bahamut set helmets.' } },
         { icone: 3206, links: [p('30/07'), p('27/08'), p('15/10')],
-          pt: { t: 'Menos quedas e fechamentos', p: 'Melhorias na engine e na infraestrutura reduziram desconexões e fechamentos inesperados. O crash "CRITICAL DATA ERROR" da Fúria Divina do TransKnight foi corrigido.' },
-          en: { t: 'Fewer disconnects and crashes', p: 'Engine and infrastructure improvements reduced disconnects and unexpected closes. The TransKnight Divine Fury "CRITICAL DATA ERROR" crash was fixed.' } },
+          pt: { t: 'Menos quedas e fechamentos do jogo', p: 'A engine do jogo e os servidores receberam melhorias para reduzir as desconexões e os fechamentos inesperados. Também foi corrigida a falha que podia causar o erro "CRITICAL DATA ERROR" e fechar o jogo quando o TransKnight usava a Fúria Divina.' },
+          en: { t: 'Fewer disconnects and crashes', p: 'The game engine and servers received improvements aimed at reducing disconnects and unexpected closures. The bug that could cause a "CRITICAL DATA ERROR" and close the game when a TransKnight used Divine Fury was also fixed.' } },
       ] },
-    { id: 'conveniencia', icone: 4397, r: { pt: 'Inventário Virtual e proteção contra perda de itens.', en: 'Virtual Inventory and protection against losing items.' },
-      pt: { t: 'Menos dor de cabeça no dia a dia', d: 'Para quem tem pouco tempo e muito item guardado.' },
-      en: { t: 'Less hassle day to day', d: 'For players with little time and a lot of stored items.' },
+    { id: 'conveniencia', icone: 4397,
+      r: { pt: 'Inventário Virtual e proteção contra perda de itens.', en: 'Virtual Inventory and protection against losing items.' },
+      pt: { t: 'Menos dor de cabeça no dia a dia', d: 'Mudanças para quem tem pouco tempo e muito item guardado.' },
+      en: { t: 'Less hassle day to day', d: 'Changes for players with little time and a lot of stored items.' },
       cards: [
         { icone: 4397, links: [g(3536, 'Guia Inventário Virtual', 'Virtual Inventory guide')],
-          pt: { t: 'Inventário Virtual para trajes e skins', p: '30 slots grátis no site para guardar <i>Trajes</i> e <i>Skins de Montaria</i>. Para enviar, usa-se uma <i>Virtual Capsule</i> (200 NP); o resgate para o jogo é grátis e ilimitado. Ótimo para quem volta com o inventário lotado.' },
-          en: { t: 'Virtual Inventory for costumes and skins', p: '30 free slots on the website to store <i>Costumes</i> and <i>Mount Skins</i>. Sending uses a <i>Virtual Capsule</i> (200 NP); bringing them back is free and unlimited. Great if you return with a full inventory.' } },
-        { icone: 5912, links: [p('01/10'), g(3648, 'Guia Composição +10', '+10 Composition guide'), g(2162, 'Guia Check-in', 'Check-in guide')],
-          pt: { t: 'Proteções contra perda de itens', p: 'A Auto-Venda separa exibir de vender e o desagrupamento pede confirmação. A composição +10 no <u>Aileen</u> mostra os 4 adicionais possíveis antes. O <i>Emblema da Valquíria</i> avisa antes de virar imóvel e o <i>Jackal BlazeBorn</i> não apaga mais a skin da montaria.' },
-          en: { t: 'Protection against losing items', p: 'Auto-Sell separates display from selling and unstacking asks for confirmation. +10 composition at <u>Aileen</u> shows the 4 possible bonuses first. The <i>Valkyrie Emblem</i> warns before becoming untradeable and <i>Jackal BlazeBorn</i> no longer erases the mount skin.' } },
+          pt: { t: 'Inventário Virtual para trajes e skins', p: 'Se você volta com o inventário lotado de cosméticos, agora pode guardá-los no site. O Inventário Virtual tem 30 espaços grátis para <i>Trajes</i> e <i>Skins de Montaria</i>. Para mandar um item para lá, use uma <i>Virtual Capsule</i> (200 NP, na Premium Neil). Trazer de volta para o jogo é grátis e pode ser feito quantas vezes quiser, mas guardar de novo pede outra cápsula.' },
+          en: { t: 'Virtual Inventory for costumes and skins', p: 'If you come back with an inventory full of cosmetics, you can now store them on the website. The Virtual Inventory has 30 free slots for <i>Costumes</i> and <i>Mount Skins</i>. To send an item there, use a <i>Virtual Capsule</i> (200 NP, at Premium Neil). Bringing it back into the game is free and unlimited, but storing it again takes another capsule.' } },
+        { icone: 5912, links: [p('01/10')],
+          pt: { t: 'Auto-Venda e desagrupamento mais seguros', p: 'A Auto-Venda ganhou um Modo de Exibição: o item fica visível para os outros jogadores, mas não pode ser comprado. Assim dá para mostrar um item sem o risco de vendê-lo. E, quando você anuncia um item para venda normal, o jogo agora mostra uma confirmação avisando que ele poderá ser comprado pelo valor definido. Também há um novo desagrupamento individual: você escolhe quantas unidades quer separar, uma por espaço livre, e confirma antes. Se faltar espaço no inventário, nada é separado pela metade. Atenção: nem todo item pode ser reagrupado depois, e o Suporte não reagrupa itens separados por engano.' },
+          en: { t: 'Safer Auto-Sell and unstacking', p: 'Auto-Sell now has a Display Mode: other players can see the item, but cannot buy it. That way you can show an item with no risk of selling it. And when you list an item for regular sale, the game now shows a confirmation that it can be bought for the price you set. There is also a new individual unstack option: you choose how many units to split, one per free slot, and confirm first. If there is not enough inventory space, nothing is split halfway. Note: not every item can be stacked again afterwards, and Support does not restack items split by mistake.' } },
+        { icone: 6493, links: [p('01/10'), g(3648, 'Guia Composição +10', '+10 Composition guide')],
+          pt: { t: 'Avisos antes de ações sem volta', p: 'Algumas ações que não têm como desfazer agora avisam antes. Na composição +10 de itens Mortal e Arch, o <u>Aileen</u> mostra os quatro adicionais possíveis antes de você confirmar. O <i>Emblema da Valquíria</i> avisa antes do primeiro refino que pode deixá-lo imóvel, e você pode confirmar ou cancelar. E, na composição do <i>Jackal BlazeBorn</i>, se a montaria usada tiver uma skin equipada, é preciso removê-la antes de continuar, para que ela não seja apagada.' },
+          en: { t: 'Warnings before actions you cannot undo', p: 'Some actions that cannot be undone now warn you first. In +10 composition of Mortal and Arch items, <u>Aileen</u> shows the four possible bonuses before you confirm. The <i>Valkyrie Emblem</i> warns you before the first refine that can make it untradeable, and you can confirm or cancel. And in <i>Jackal BlazeBorn</i> composition, if the mount you use has a skin equipped, you must remove it before continuing, so it is not erased.' } },
         { icone: 4043, links: [p('27/08'), p('03/09'), p('24/09'), g(3636, 'Políticas de Conduta', 'Conduct policies')],
-          pt: { t: 'Conta mais segura e menos spam', p: 'Travas contra tentativas de invasão no login e validação por e-mail em contas novas. Há limites para mensagens privadas e pedidos de grupo, duelo e troca, e a política contra assédio ficou mais rígida.' },
-          en: { t: 'Safer account and less spam', p: 'Login protection against break-in attempts and e-mail validation for new accounts. Private messages and party, duel and trade requests are rate-limited, and the harassment policy is stricter.' } },
+          pt: { t: 'Conta mais segura e menos spam', p: 'O login ganhou travas contra tentativas automáticas de adivinhar senhas, e novas contas precisam confirmar o e-mail no cadastro. No chat, mensagens privadas e pedidos de grupo, duelo e troca passaram a ter intervalo e limite, o que reduz o spam. Personagens Mortais precisam de um nível mínimo para iniciar conversas privadas, mas podem responder normalmente. As regras contra discriminação, assédio e preconceito também ficaram mais rígidas: nas infrações graves, a punição pode se estender a todas as contas ligadas ao responsável.' },
+          en: { t: 'Safer account and less spam', p: 'Login now blocks automated password-guessing attempts, and new accounts must confirm their e-mail when signing up. In chat, private messages and party, duel and trade requests now have cooldowns and limits, which cuts down on spam. Mortal characters need a minimum level to start private conversations, but can reply normally. Rules against discrimination, harassment and prejudice also got stricter: for serious offenses, the penalty can extend to every account linked to the person responsible.' } },
       ] },
-    { id: 'futuro', icone: 5265, r: { pt: 'Duas quests novas, guildas reformuladas e Check-in melhor.', en: 'Two new quests, reworked guilds and a better Check-in.' },
-      pt: { t: 'O que vem por aí', d: 'Anunciado no roadmap oficial do 2º semestre.' },
-      en: { t: 'What is coming', d: 'Announced in the official 2nd half roadmap.' },
-      cards: [
-        { icone: 5265, selo: 'breve', links: [ROADMAP],
-          pt: { t: 'Quest Ruínas Profanadas', p: 'Quest nova e difícil, ligada à progressão dos novos acessórios Ancient, que vão ganhar uma linha de adicionais exclusivos.' },
-          en: { t: 'Profaned Ruins quest', p: 'A new, hard quest tied to the new Ancient accessories, which will get an exclusive line of bonuses.' } },
-        { icone: 5260, selo: 'breve', links: [ROADMAP],
-          pt: { t: 'Quest Caravan Expedition', p: 'Expedições com gestão de recursos e planejamento, com recompensas para quem administrar bem cada viagem.' },
-          en: { t: 'Caravan Expedition quest', p: 'Expeditions built on resource management and planning, rewarding players who run each trip well.' } },
-        { icone: 5916, selo: 'breve', links: [ROADMAP],
-          pt: { t: 'Sistema de Guilds reformulado', p: 'Reformulação completa para deixar o sistema mais intuitivo e competitivo, para quem chega e para os veteranos.' },
-          en: { t: 'Reworked guild system', p: 'A full rework to make guilds more intuitive and competitive, for newcomers and veterans alike.' } },
-        { icone: 5903, selo: 'breve', links: [ROADMAP, g(2306, 'Guia Royal Arena', 'Royal Arena guide')],
-          pt: { t: 'Royal Arena com mais vagas', p: 'Um modo novo e ajustes nos horários, para que mais jogadores disputem ao longo do dia sem ficar de fora por lotação.' },
-          en: { t: 'Royal Arena with more spots', p: 'A new mode and schedule changes so more players can compete through the day without being left out.' } },
-        { icone: 5250, selo: 'breve', links: [ROADMAP, g(2162, 'Guia Check-in', 'Check-in guide')],
-          pt: { t: 'Check-in diário repensado', p: 'Entrar todos os dias vai dar recompensas bem maiores.' },
-          en: { t: 'Daily Check-in redesigned', p: 'Logging in every day will give much bigger rewards.' } },
-      ] },
-    { id: 'agora', icone: 'abobora.webp', r: { pt: 'HalloWYD no ar e patch grande em 05/11.', en: 'HalloWYD is live and a big patch lands on Nov 5.' },
-      pt: { t: 'Agora em Kersef', d: 'O que está rolando e o que tem data marcada.' },
-      en: { t: 'Now in Kersef', d: 'What is live and what has a date.' },
+    { id: 'agora', icone: 'abobora.webp',
+      r: { pt: 'HalloWYD no ar e atualização grande em 05/11.', en: 'HalloWYD is live and a big update lands on Nov 5.' },
+      pt: { t: 'Agora em Kersef', d: 'O que está acontecendo e o que já tem data marcada.' },
+      en: { t: 'Now in Kersef', d: 'What is live now and what already has a date.' },
       cards: [
         { icone: 'abobora.webp', selo: 'andamento', links: [p('08/10'), p('15/10'), g('3664#HALLOWYD', 'Evento HalloWYD Parte III', 'HalloWYD Event Part III')],
-          pt: { t: 'HalloWYD: Dark Legion', p: 'Quatro vezes ao dia o <u>Harvest Cultist</u> invoca a Dark Legion no Campo de Armia (X:2143 Y:2093). Ela solta <i>Hallo Pumpkin</i>, <i>Scare Pumpkin</i> e <i>Raven Pumpkin</i>, trocados por itens exclusivos no <u>Frykt</u>. Durante o evento, o Caçador de Espólios pede só 20 <i>Hunting Loot</i> em vez de 30.' },
-          en: { t: 'HalloWYD: Dark Legion', p: 'Four times a day the <u>Harvest Cultist</u> summons the Dark Legion at Armia Field (X:2143 Y:2093). It drops <i>Hallo Pumpkin</i>, <i>Scare Pumpkin</i> and <i>Raven Pumpkin</i>, traded for exclusive items at <u>Frykt</u>. During the event, the Loot Hunter asks for 20 <i>Hunting Loot</i> instead of 30.' } },
+          pt: { t: 'HalloWYD: Dark Legion', p: 'O evento de Halloween está no ar. Quatro vezes por dia, o <u>Harvest Cultist</u> invoca a Dark Legion no Campo de Armia (X:2143 Y:2093). Ela deixa cair <i>Hallo Pumpkin</i>, <i>Scare Pumpkin</i> e <i>Raven Pumpkin</i>, que você troca por itens exclusivos com o <u>Frykt</u>. Por tempo limitado, a quest do Caçador de Espólios pede só 20 <i>Hunting Loot</i>, em vez de 30.' },
+          en: { t: 'HalloWYD: Dark Legion', p: 'The Halloween event is live. Four times a day, the <u>Harvest Cultist</u> summons the Dark Legion at Armia Field (X:2143 Y:2093). It drops <i>Hallo Pumpkin</i>, <i>Scare Pumpkin</i> and <i>Raven Pumpkin</i>, which you trade for exclusive items at <u>Frykt</u>. For a limited time, the Loot Hunter quest asks for only 20 <i>Hunting Loot</i> instead of 30.' } },
         { icone: 484, links: [p('01/10'), { tipo: 'guia', pt: 'Comunicado do novo ciclo', en: 'New cycle announcement', url: BASE + 'noticias/news/3638-comunicado-2' }],
-          pt: { t: 'Próximo patch grande: 05/11', p: 'A primeira manutenção de cada mês traz o conteúdo novo. A próxima é em 05/11: um bom momento para já estar de volta.' },
-          en: { t: 'Next big patch: Nov 5', p: 'The first maintenance of each month brings the new content. The next one is on Nov 5, a good time to already be back.' } },
+          pt: { t: 'Próxima grande atualização: 05/11', p: 'Desde outubro, a primeira manutenção de cada mês é a que traz conteúdo novo, e as das outras semanas cuidam de correções. A próxima grande atualização é em 05/11, um bom momento para já estar de volta ao jogo.' },
+          en: { t: 'Next big update: Nov 5', p: 'Since October, the first maintenance of each month is the one that brings new content, while the other weeks focus on fixes. The next big update is on Nov 5, a good time to already be back in the game.' } },
+        { icone: 5250, selo: 'breve', links: [p('22/10'), g(2162, 'Guia Check-in', 'Check-in guide')],
+          pt: { t: 'Check-in Diário atualizado em 05/11', p: 'Na manutenção de 05/11, o Check-in Diário será atualizado e o ciclo atual vai recomeçar do zero. Depois da manutenção, é só pegar uma nova chave para começar o ciclo novo.' },
+          en: { t: 'Daily Check-in updated on Nov 5', p: 'In the Nov 5 maintenance, the Daily Check-in will be updated and the current cycle will start over. After the maintenance, just get a new key to begin the new cycle.' } },
       ] },
   ],
 };
@@ -844,7 +846,7 @@ const T = {
     novTit: 'Últimas atualizações', evTit: 'Evento ativo', atualizacoes: 'Atualizações',
     resumoTit: 'Resumo das atualizações dos últimos 100 dias', resumoTxt: 'Sistemas novos, ajustes de classe e eventos, num só lugar.', verResumo: 'Ver resumo →',
     mudancasTit: 'mudanças nos últimos 100 dias', verTodas: 'Ver tudo', nMud: (n) => n === 1 ? '1 mudança' : `${n} mudanças`, fechar: 'Fechar',
-    selo: { breve: 'Em breve', andamento: 'Em andamento' },
+    selo: { breve: 'Em breve', andamento: 'Em andamento' }, maiorNovidade: 'Maior novidade',
     evento: 'Evento', hallTit: 'Evento Hallowyd', hallAte: 'Disponível até 05/11', hallTxt: 'O evento de Halloween de Kersef. Entre antes que acabe.', verSite: 'Ver no site ↗',
     vidTit: 'Vídeos em destaque', verCanal: 'Ver no canal', assistir: 'Assistir no YouTube', vidKicker: 'Progressão',
     vidNome: 'Evolução completa do Mortal ao Subcelestial', vidTxt: 'Do zero ao Sub-Celestial: o caminho completo de evolução, para retomar de onde você parou.',
@@ -875,7 +877,7 @@ const T = {
     novTit: 'Latest updates', evTit: 'Active event', atualizacoes: 'Updates',
     resumoTit: 'Summary of the last 100 days of updates', resumoTxt: 'New systems, class changes and events, all in one place.', verResumo: 'See summary →',
     mudancasTit: 'changes in the last 100 days', verTodas: 'See everything', nMud: (n) => n === 1 ? '1 change' : `${n} changes`, fechar: 'Close',
-    selo: { breve: 'Coming soon', andamento: 'Live now' },
+    selo: { breve: 'Coming soon', andamento: 'Live now' }, maiorNovidade: 'Biggest update',
     evento: 'Event', hallTit: 'Hallowyd Event', hallAte: 'Available until Nov 5', hallTxt: 'Kersef’s Halloween event. Join before it ends.', verSite: 'See on the website ↗',
     vidTit: 'Featured videos', verCanal: 'See the channel', assistir: 'Watch on YouTube', vidKicker: 'Progression',
     vidNome: 'Complete progression from Mortal to Subcelestial', vidTxt: 'From zero to Sub-Celestial: the full evolution path, to pick up where you left off.',
@@ -1011,7 +1013,7 @@ function temas(onde) {
 function resumo() {
   $('#n-mudancas').textContent = total;
   $('#periodo-mod').textContent = A.periodo[lang];
-  $('#temas-grid').innerHTML = A.secoes.map((s) => `<li><button type="button" class="tema-bloco" data-sec="${s.id}"><span class="slot-i"><img src="${UPD[ico(s.icone)]}" alt="" width="48" height="48"></span><b>${s[lang].t}</b><span class="r">${s.r[lang]}</span><span class="qtd">${T[lang].nMud(s.cards.length)} →</span></button></li>`).join('');
+  $('#temas-grid').innerHTML = A.secoes.map((s) => `<li><button type="button" class="tema-bloco${s.destaque ? ' em-destaque' : ''}" data-sec="${s.id}"><span class="slot-i"><img src="${UPD[ico(s.icone)]}" alt="" width="48" height="48"></span><b>${s.destaque ? `<span class="tag-dest">${T[lang].maiorNovidade}</span>` : ''}${s[lang].t}</b><span class="r">${s.r[lang]}</span><span class="qtd">${T[lang].nMud(s.cards.length)} →</span></button></li>`).join('');
   $('#temas-modal').innerHTML = temas();
   $('#abrir-resumo').textContent = T[lang].verTodas + ' →';
   $('#periodo').textContent = A.periodo[lang];
@@ -1019,7 +1021,7 @@ function resumo() {
     const tab = c.tabela ? `<div class="tab"><table><thead><tr>${c.tabela.cab[lang].map((h) => `<th>${h}</th>`).join('')}</tr></thead><tbody>${c.tabela.linhas.map((l) => `<tr>${l.map((v) => `<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : '';
     const links = c.links.map((l) => `<a class="${l.tipo}" href="${l.url}" target="_blank" rel="noopener">${l.tipo === 'patch' ? 'Patchlist ' + l.d : l[lang]}</a>`).join('');
     const selo = c.selo ? `<span class="selo-mini ${c.selo}">${T[lang].selo[c.selo]}</span>` : '';
-    return `<li${c.tabela ? ' class="largo"' : ''}><span class="slot-i"><img src="${UPD[ico(c.icone)]}" alt="" width="48" height="48" loading="lazy"></span><div class="c"><h4>${c[lang].t}${selo}</h4><p>${c[lang].p}</p>${tab}<div class="fontes">${links}</div></div></li>`;
+    return `<li><span class="slot-i"><img src="${UPD[ico(c.icone)]}" alt="" width="48" height="48" loading="lazy"></span><div class="c"><h4>${c[lang].t}${selo}</h4><p>${c[lang].p}</p>${tab}<div class="fontes">${links}</div></div></li>`;
   }).join('')}</ul></section>`).join('');
 }
 const dlg = $('#leitura'), corpo = $('#leitura-corpo');
